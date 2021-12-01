@@ -1,14 +1,15 @@
 //Setting board size variables for dynamic board building
 const height = 6
-const width = 4
+const width = 3
 const winningSize = 3
+var won = false
 //Setting colors in reference to player classes for easier editing of code in the future
 const colors = {pink : 'player1', green : 'player2'}
-var turn = 'player1'
+var turn = 1
 //Building initial board
 createBoard(height, width)
 //Printing out current turn for debugging and tracking purposes
-console.log(turn)
+console.log('Player '+turn)
 
 //Creating dictionary of all tiles for logic purposes
 const allTiles = []
@@ -19,29 +20,70 @@ for(var i = 1;i < height+1;++i){
     }
 }
 console.log(allTiles)
+
+
 function setTile(tileID, tileClass){
 
-    if(tileClass == 'noPlayer'){
+    if(won == true){
+        
+    }else if(tileClass == 'noPlayer'){
+        //Calculating lowest tile available
+        currentHeight = tileID.substring(1,2)
+        console.log(currentHeight)
+        currentRow = tileID.substring(3,4)
+        console.log(currentRow)
+
+        //'C' + i + 'R' + currentRow
+        //for(i=currentHeight;i<height;++i){
+        //    var tileClass = document.getElementById('C' + i + 'R' + currentRow).classList
+        //    if(tileClass.contains('noPlayer')){
+
+        //    }else{
+        //        tileID = 'C' + i-1 + 'R' + currentRow
+        //        console.log(tileID)
+        //    }
+        //}
+
+        for(i=height;i>0;--i){
+            var tileClass = document.getElementById('C' + i + 'R' + currentRow).classList
+
+            if(tileClass.contains('noPlayer')){
+                tileID = 'C' + i + 'R' + currentRow
+                break
+            }
+        }
+
         //Removing the blank class from the tile
         document.getElementById(tileID).classList.remove('noPlayer')
-        //Setting the tile to be the correct color
-        document.getElementById(tileID).classList.add(turn)
 
+
+
+
+
+        //Setting the tile to be the correct color
+        switch(turn){
+            case 1:
+                document.getElementById(tileID).classList.add('player1')
+                break
+            case 2:
+                document.getElementById(tileID).classList.add('player2')
+                break
+        }
         //Processing turn to next player
-        if(turn == colors.pink){
-            turn = colors.green
+        if(turn == 1){
+            turn = 2
             document.getElementById('status').innerHTML = 'Current Turn: Player 2'
             document.getElementById('status').style.color = '#00FF35'
         }else{
-            turn = colors.pink
+            turn = 1
             document.getElementById('status').innerHTML = 'Current Turn: Player 1'
             document.getElementById('status').style.color = '#FF00CA'
         }
 
-        console.log(turn)
+        console.log('Player '+turn)
     }else{
-        text = document.getElementById('status').innerHTML
-        text += ' - Please select an unoccupied tile'
+
+        text = 'Current Turn: Player ' + turn + ' - Please select an unoccupied tile'
         document.getElementById('status').innerHTML = text
     }
 }
