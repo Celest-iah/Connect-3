@@ -1,3 +1,28 @@
+.noPlayer{
+    background-color: #d2d2d2;
+}
+.player1{
+    background-color: #FF00CA;
+}
+.player2{
+    background-color: #00FF35;
+}
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+button {
+    border-radius: 100%;
+    border: none;
+    height: 100px;
+    width: 100px;
+    padding: 5px;
+}
+.board {
+    border-radius: 3%;
+    margin: auto;
+    background-color: #000d9f;
+    padding: 10px;
+    text-align: center;
+    width: fit-content;
+    height: fit-content;
 }
