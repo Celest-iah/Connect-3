@@ -25,24 +25,13 @@ console.log(allTiles)
 function setTile(tileID, tileClass){
 
     if(won == true){
-        
+       pass 
     }else if(tileClass == 'noPlayer'){
         //Calculating lowest tile available
         currentHeight = tileID.substring(1,2)
         console.log(currentHeight)
         currentRow = tileID.substring(3,4)
         console.log(currentRow)
-
-        //'C' + i + 'R' + currentRow
-        //for(i=currentHeight;i<height;++i){
-        //    var tileClass = document.getElementById('C' + i + 'R' + currentRow).classList
-        //    if(tileClass.contains('noPlayer')){
-
-        //    }else{
-        //        tileID = 'C' + i-1 + 'R' + currentRow
-        //        console.log(tileID)
-        //    }
-        //}
 
         for(i=height;i>0;--i){
             var tileClass = document.getElementById('C' + i + 'R' + currentRow).classList
@@ -55,29 +44,20 @@ function setTile(tileID, tileClass){
 
         //Removing the blank class from the tile
         document.getElementById(tileID).classList.remove('noPlayer')
-
-
-
-
-
-        //Setting the tile to be the correct color
+        //Processing turn to next player and setting tile colors
         switch(turn){
             case 1:
+                turn = 2
                 document.getElementById(tileID).classList.add('player1')
+                document.getElementById('status').innerHTML = 'Current Turn: Player 2'
+                document.getElementById('status').style.color = '#00FF35'
                 break
             case 2:
+                turn = 1
                 document.getElementById(tileID).classList.add('player2')
+                document.getElementById('status').innerHTML = 'Current Turn: Player 1'
+                document.getElementById('status').style.color = '#FF00CA'
                 break
-        }
-        //Processing turn to next player
-        if(turn == 1){
-            turn = 2
-            document.getElementById('status').innerHTML = 'Current Turn: Player 2'
-            document.getElementById('status').style.color = '#00FF35'
-        }else{
-            turn = 1
-            document.getElementById('status').innerHTML = 'Current Turn: Player 1'
-            document.getElementById('status').style.color = '#FF00CA'
         }
 
         console.log('Player '+turn)
@@ -87,14 +67,6 @@ function setTile(tileID, tileClass){
         document.getElementById('status').innerHTML = text
     }
 }
-
-
-    
-
-
-
-
-
 function createBoard(height, width){
     //Creating board variables
     console.log('Board Height: ' + height)
