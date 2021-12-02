@@ -1,12 +1,13 @@
 //Setting board size variables for dynamic board building
 const height = 6
-const width = 3
+const width = 7
 const winningSize = 3
 var won = false
 //Setting colors in reference to player classes for easier editing of code in the future
 const colors = {pink : 'player1', green : 'player2'}
 var turn = 1
-//Building initial board
+//Building initial board//Creating list of elements so they can be added at once
+const elementList = []
 createBoard(height, width)
 //Printing out current turn for debugging and tracking purposes
 console.log('Player '+turn)
@@ -19,6 +20,8 @@ for(var i = 1;i < height+1;++i){
         allTiles.push({key:currentID,value:0})
     }
 }
+
+
 console.log(allTiles)
 
 
@@ -33,17 +36,6 @@ function setTile(tileID, tileClass){
         currentRow = tileID.substring(3,4)
         console.log(currentRow)
 
-        //'C' + i + 'R' + currentRow
-        //for(i=currentHeight;i<height;++i){
-        //    var tileClass = document.getElementById('C' + i + 'R' + currentRow).classList
-        //    if(tileClass.contains('noPlayer')){
-
-        //    }else{
-        //        tileID = 'C' + i-1 + 'R' + currentRow
-        //        console.log(tileID)
-        //    }
-        //}
-
         for(i=height;i>0;--i){
             var tileClass = document.getElementById('C' + i + 'R' + currentRow).classList
 
@@ -53,13 +45,9 @@ function setTile(tileID, tileClass){
             }
         }
 
+
         //Removing the blank class from the tile
         document.getElementById(tileID).classList.remove('noPlayer')
-
-
-
-
-
         //Setting the tile to be the correct color
         switch(turn){
             case 1:
@@ -102,8 +90,7 @@ function createBoard(height, width){
     const board = document.createElement('div')
     board.classList.add('board')
 
-    //Creating list of elements so they can be added at once
-    const elementList = []
+    
     //Using 1 instead of 0 for incremental for the sake of creating ID's
     for(var i = 1;i < height+1;++i){
         for(var v = 1;v < width+1;++v){
